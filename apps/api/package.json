@@ -16,6 +16,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@saas/eslint-config": "workspace:*",
     "@saas/prettier-config": "workspace:*",
     "@saas/ts-config": "workspace:*",
@@ -23,6 +24,9 @@
     "@types/node": "^22.3.0",
     "prisma": "^5.18.0",
     "tsx": "^4.17.0"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "prettier": "@saas/prettier-config",
   "eslintConfig": {
