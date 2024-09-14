@@ -115,6 +115,28 @@ importers:
         specifier: workspace:*
         version: link:../../config/ts-config
 
+  packages/env:
+    dependencies:
+      '@t3-oss/env-nextjs':
+        specifier: ^0.11.1
+        version: 0.11.1(typescript@5.3.3)(zod@3.23.8)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+    devDependencies:
+      '@saas/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@saas/prettier-config':
+        specifier: workspace:*
+        version: link:../../config/prettier-config
+      '@saas/ts-config':
+        specifier: workspace:*
+        version: link:../../config/ts-config
+      '@types/node':
+        specifier: ^22.3.0
+        version: 22.3.0
+
 packages:
 
   '@aashutoshrathi/word-wrap@1.2.6':
@@ -400,6 +422,24 @@ packages:
   '@scalar/types@0.0.5':
     resolution: {integrity: sha512-aRPKMt6tXUn+jN/YReJ1CCyjM5rAwJYRJrW+XP4YzlCQf6d4N2dOTmkC2GLEu4iPvhy1Pig6Bnbl7fLiPiKEYg==, tarball: https://registry.npmjs.org/@scalar/types/-/types-0.0.5.tgz}
     engines: {node: '>=18'}
+
+  '@t3-oss/env-core@0.11.1':
+    resolution: {integrity: sha512-MaxOwEoG1ntCFoKJsS7nqwgcxLW1SJw238AJwfJeaz3P/8GtkxXZsPPolsz1AdYvUTbe3XvqZ/VCdfjt+3zmKw==, tarball: https://registry.npmjs.org/@t3-oss/env-core/-/env-core-0.11.1.tgz}
+    peerDependencies:
+      typescript: '>=5.0.0'
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@t3-oss/env-nextjs@0.11.1':
+    resolution: {integrity: sha512-rx2XL9+v6wtOqLNJbD5eD8OezKlQD1BtC0WvvtHwBgK66jnF5+wGqtgkKK4Ygie1LVmoDClths2T4tdFmRvGrQ==, tarball: https://registry.npmjs.org/@t3-oss/env-nextjs/-/env-nextjs-0.11.1.tgz}
+    peerDependencies:
+      typescript: '>=5.0.0'
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   '@types/bcryptjs@2.4.6':
     resolution: {integrity: sha512-9xlo6R2qDs5uixm0bcIqCeMCE6HiQsIyel9KQySStiyqNl2tnj2mP3DX1Nf56MD6KMenNNlBBsy3LJ7gUEQPXQ==, tarball: https://registry.npmjs.org/@types/bcryptjs/-/bcryptjs-2.4.6.tgz}
@@ -2072,6 +2112,19 @@ snapshots:
       '@scalar/openapi-types': 0.0.1
       '@scalar/themes': 0.9.28
       '@unhead/schema': 1.10.0
+
+  '@t3-oss/env-core@0.11.1(typescript@5.3.3)(zod@3.23.8)':
+    dependencies:
+      zod: 3.23.8
+    optionalDependencies:
+      typescript: 5.3.3
+
+  '@t3-oss/env-nextjs@0.11.1(typescript@5.3.3)(zod@3.23.8)':
+    dependencies:
+      '@t3-oss/env-core': 0.11.1(typescript@5.3.3)(zod@3.23.8)
+      zod: 3.23.8
+    optionalDependencies:
+      typescript: 5.3.3
 
   '@types/bcryptjs@2.4.6': {}
 
