@@ -1,3 +1,4 @@
+import { env } from '@saas/env'
 import { compare } from 'bcryptjs'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
@@ -61,7 +62,7 @@ export async function authenticateWithPassword(app: FastifyInstance) {
         },
         {
           sign: {
-            expiresIn: '7d',
+            expiresIn: env.JWT_EXPIRES_IN,
           },
         },
       )
