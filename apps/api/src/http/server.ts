@@ -1,6 +1,7 @@
 import fastifyCors from '@fastify/cors'
 import fastifyJwt from '@fastify/jwt'
 import fastifySwagger from '@fastify/swagger'
+import { env } from '@saas/env'
 import fastifyScalarUI from '@scalar/fastify-api-reference'
 import fastify from 'fastify'
 import {
@@ -45,7 +46,7 @@ app.register(fastifyScalarUI, {
 })
 
 app.register(fastifyJwt, {
-  secret: 'my-jwt-secret',
+  secret: env.JWT_SECRET,
 })
 
 app.register(fastifyCors)
