@@ -9,7 +9,7 @@ import { getUserPermissions } from '@/utils/get-user-permissions'
 
 import { BadRequestError } from '../_errors/bad-request-error'
 
-export async function createOrganization(app: FastifyInstance) {
+export async function updateOrganization(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(authMiddleware)
