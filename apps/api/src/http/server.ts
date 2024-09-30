@@ -17,6 +17,10 @@ import { createAccount } from '@/http/routes/auth/create-account'
 import { getProfile } from '@/http/routes/auth/get-profile'
 import { requestPasswordRecover } from '@/http/routes/auth/request-password-recover'
 import { resetPassword } from '@/http/routes/auth/reset-password'
+import { createOrganization } from '@/http/routes/orgs/create-organization'
+import { getMembership } from '@/http/routes/orgs/get-membership'
+import { getOrganization } from '@/http/routes/orgs/get-organization'
+import { getOrganizations } from '@/http/routes/orgs/get-organizations'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -65,6 +69,11 @@ app.register(authenticateWithPassword)
 app.register(getProfile)
 app.register(requestPasswordRecover)
 app.register(resetPassword)
+
+app.register(createOrganization)
+app.register(getMembership)
+app.register(getOrganization)
+app.register(getOrganizations)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('Server listening on port 3333')
