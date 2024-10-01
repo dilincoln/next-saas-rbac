@@ -18,6 +18,7 @@ import { getProfile } from '@/http/routes/auth/get-profile'
 import { requestPasswordRecover } from '@/http/routes/auth/request-password-recover'
 import { resetPassword } from '@/http/routes/auth/reset-password'
 import { getMembers } from '@/http/routes/members/get-members'
+import { updateMember } from '@/http/routes/members/update-member'
 import { createOrganization } from '@/http/routes/orgs/create-organization'
 import { getMembership } from '@/http/routes/orgs/get-membership'
 import { getOrganization } from '@/http/routes/orgs/get-organization'
@@ -94,6 +95,7 @@ app.register(getProjects)
 app.register(updateProject)
 
 app.register(getMembers)
+app.register(updateMember)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('Server listening on port 3333')
