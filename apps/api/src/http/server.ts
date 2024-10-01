@@ -17,6 +17,7 @@ import { createAccount } from '@/http/routes/auth/create-account'
 import { getProfile } from '@/http/routes/auth/get-profile'
 import { requestPasswordRecover } from '@/http/routes/auth/request-password-recover'
 import { resetPassword } from '@/http/routes/auth/reset-password'
+import { acceptInvite } from '@/http/routes/invites/accept-invite'
 import { createInvite } from '@/http/routes/invites/create-invite'
 import { getInvite } from '@/http/routes/invites/get-invite'
 import { getInvites } from '@/http/routes/invites/get-invites'
@@ -105,6 +106,7 @@ app.register(removeMember)
 app.register(createInvite)
 app.register(getInvite)
 app.register(getInvites)
+app.register(acceptInvite)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('Server listening on port 3333')
