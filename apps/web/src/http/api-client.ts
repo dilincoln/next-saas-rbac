@@ -1,5 +1,12 @@
 import { env } from '@saas/env'
 
+class HTTPError {
+  constructor(
+    public message: string,
+    public status: number = 400
+  ) {}
+}
+
 class ApiClient {
   private baseUrl = env.NEXT_PUBLIC_API_URL
 
@@ -15,7 +22,7 @@ class ApiClient {
     const response = await request.json()
 
     if (!request.ok) {
-      throw new Error(response.message)
+      throw new HTTPError(response.message, request.status)
     }
 
     return response as Promise<R>
@@ -78,4 +85,6 @@ class ApiClient {
   }
 }
 
-export const api = new ApiClient()
+const api = new ApiClient()
+
+export { api, HTTPError }
