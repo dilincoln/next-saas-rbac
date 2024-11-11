@@ -10,7 +10,7 @@ export async function getProfile(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(authMiddleware)
-    .post(
+    .get(
       '/profile',
       {
         schema: {
@@ -49,6 +49,6 @@ export async function getProfile(app: FastifyInstance) {
         }
 
         return reply.send({ user })
-      },
+      }
     )
 }
