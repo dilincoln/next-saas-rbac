@@ -1,4 +1,5 @@
 import { env } from '@saas/env'
+import { getCookie, type CookiesFn } from 'cookies-next'
 
 class HTTPError {
   constructor(
@@ -11,12 +12,33 @@ class ApiClient {
   private baseUrl = env.NEXT_PUBLIC_API_URL
 
   private async request<R>(url: string, config?: RequestInit) {
+    const headers: HeadersInit = {
+      ...config?.headers,
+      'Content-Type': 'application/json',
+    }
+
+    const isServerSide = typeof window === 'undefined'
+    let cookieStore: CookiesFn | undefined
+
+    if (isServerSide) {
+      const { cookies: serverCookies } = await import('next/headers')
+
+      cookieStore = serverCookies
+    }
+
+    const token = await getCookie('token', {
+      cookies: cookieStore,
+    })
+
+    if (token) {
+      Object.assign(headers, {
+        Authorization: `Bearer ${token}`,
+      })
+    }
+
     const request = await fetch(new URL(url, this.baseUrl).toString(), {
       ...config,
-      headers: {
-        ...config?.headers,
-        'Content-Type': 'application/json',
-      },
+      headers,
     })
 
     const response = await request.json()
