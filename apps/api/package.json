@@ -2,6 +2,7 @@
   "name": "@saas/api",
   "version": "0.0.0",
   "scripts": {
+    "lint": "eslint .",
     "dev": "pnpm env:load tsx watch src/http/server.ts",
     "db:migrate": "pnpm env:load prisma migrate dev",
     "db:seed": "pnpm env:load prisma db seed",
@@ -32,6 +33,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.9.0",
     "dotenv-cli": "^7.4.2",
+    "eslint": "^8.57.1",
     "prisma": "^5.22.0",
     "tsx": "^4.19.2"
   },

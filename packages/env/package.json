@@ -4,11 +4,15 @@
   "private": true,
   "main": "index.ts",
   "types": "index.ts",
+  "scripts": {
+    "lint": "eslint ."
+  },
   "devDependencies": {
     "@saas/eslint-config": "workspace:*",
     "@saas/prettier-config": "workspace:*",
     "@saas/ts-config": "workspace:*",
-    "@types/node": "^22.9.0"
+    "@types/node": "^22.9.0",
+    "eslint": "^8.57.1"
   },
   "eslintConfig": {
     "extends": [
