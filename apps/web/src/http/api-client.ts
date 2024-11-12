@@ -1,11 +1,14 @@
 import { env } from '@saas/env'
-import { getCookie, type CookiesFn } from 'cookies-next'
+import { type CookiesFn, getCookie } from 'cookies-next'
 
 class HTTPError {
-  constructor(
-    public message: string,
-    public status: number = 400
-  ) {}
+  constructor(message: string, status: number = 400) {
+    this.message = message
+    this.status = status
+  }
+
+  public message: string
+  public status: number
 }
 
 class ApiClient {
@@ -52,7 +55,7 @@ class ApiClient {
 
   public get<ResponseType>(
     url: string,
-    config?: Omit<RequestInit, 'method' | 'body'>
+    config?: Omit<RequestInit, 'method' | 'body'>,
   ) {
     return this.request<ResponseType>(url, {
       method: 'GET',
@@ -63,7 +66,7 @@ class ApiClient {
   public post<RequestType, ResponseType>(
     url: string,
     data: RequestType,
-    config?: Omit<RequestInit, 'method' | 'body'>
+    config?: Omit<RequestInit, 'method' | 'body'>,
   ) {
     return this.request<ResponseType>(url, {
       method: 'POST',
@@ -75,7 +78,7 @@ class ApiClient {
   public put<RequestType, ResponseType>(
     url: string,
     data: RequestType,
-    config?: Omit<RequestInit, 'method' | 'body'>
+    config?: Omit<RequestInit, 'method' | 'body'>,
   ) {
     return this.request<ResponseType>(url, {
       method: 'PUT',
@@ -86,7 +89,7 @@ class ApiClient {
 
   public delete<ResponseType>(
     url: string,
-    config?: Omit<RequestInit, 'method' | 'body'>
+    config?: Omit<RequestInit, 'method' | 'body'>,
   ) {
     return this.request<ResponseType>(url, {
       method: 'DELETE',
@@ -97,7 +100,7 @@ class ApiClient {
   public patch<RequestType, ResponseType>(
     url: string,
     data: RequestType,
-    config?: Omit<RequestInit, 'method' | 'body'>
+    config?: Omit<RequestInit, 'method' | 'body'>,
   ) {
     return this.request<ResponseType>(url, {
       method: 'PATCH',

@@ -1,10 +1,11 @@
 'use server'
 
-import { HTTPError } from '@/http/api-client'
-import { signInWithPassword } from '@/http/sign-in-with-password'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
+
+import { HTTPError } from '@/http/api-client'
+import { signInWithPassword } from '@/http/sign-in-with-password'
 
 const signInSchema = z.object({
   email: z
@@ -17,7 +18,7 @@ const signInSchema = z.object({
 
 export async function signInWithEmailAndPassword(
   _previousState: unknown,
-  formData: FormData
+  formData: FormData,
 ) {
   const result = signInSchema.safeParse(Object.fromEntries(formData))
 

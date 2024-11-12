@@ -1,32 +1,34 @@
 'use client'
 
+import { AlertTriangle, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useActionState } from 'react'
 
 import githubIcon from '@/assets/github-icon.svg'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-
-import { AlertTriangle, Loader2 } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 import { signInWithEmailAndPassword } from './actions'
-import { useActionState } from 'react'
-import { cn } from '@/lib/utils'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 export function SignInForm() {
-  const [{ success, message, errors, formData }, formAction, isPending] = useActionState(
-    signInWithEmailAndPassword,
-    { success: false, message: null, errors: null, formData: null }
-  )
+  const [{ success, message, errors, formData }, formAction, isPending] =
+    useActionState(signInWithEmailAndPassword, {
+      success: false,
+      message: null,
+      errors: null,
+      formData: null,
+    })
 
   return (
     <form action={formAction} className="space-y-4">
       {success === false && message && (
         <Alert variant="destructive">
-          <AlertTriangle className='size-4' />
+          <AlertTriangle className="size-4" />
           <AlertTitle>Sign in failed</AlertTitle>
           <AlertDescription>
             <p>{message}</p>
@@ -36,10 +38,17 @@ export function SignInForm() {
 
       <div className="space-y-1">
         <Label htmlFor="email">E-mail</Label>
-        <Input id="email" name="email" type="email" defaultValue={formData?.get('email')?.toString()} />
+        <Input
+          defaultValue={formData?.get('email')?.toString()}
+          id="email"
+          name="email"
+          type="email"
+        />
 
         {errors?.email && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">{errors.email}</p>
+          <p className="text-xs font-medium text-red-500 dark:text-red-400">
+            {errors.email}
+          </p>
         )}
       </div>
 
@@ -48,7 +57,9 @@ export function SignInForm() {
         <Input id="password" name="password" type="password" />
 
         {errors?.password && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">{errors.password}</p>
+          <p className="text-xs font-medium text-red-500 dark:text-red-400">
+            {errors.password}
+          </p>
         )}
 
         <Link
@@ -59,16 +70,16 @@ export function SignInForm() {
         </Link>
       </div>
 
-      <Button className="w-full" type="submit" disabled={isPending}>
-        {isPending && <Loader2 className='animate-spin size-5 mr-1' />}
+      <Button className="w-full" disabled={isPending} type="submit">
+        {isPending && <Loader2 className="mr-1 size-5 animate-spin" />}
         Sign in with e-mail
       </Button>
 
       <div className="flex w-full justify-center">
         <Button asChild size="sm" variant="link">
           <Link
-            href='/auth/sign-up'
-            className={cn(isPending && "opacity-50 pointer-events-none")}
+            className={cn(isPending && 'pointer-events-none opacity-50')}
+            href="/auth/sign-up"
           >
             Create new account
           </Link>
@@ -79,9 +90,9 @@ export function SignInForm() {
 
       <Button
         className="w-full"
+        disabled={isPending}
         type="submit"
         variant="outline"
-        disabled={isPending}
       >
         <Image
           alt="Sign in with Github"

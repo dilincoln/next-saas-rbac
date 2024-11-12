@@ -14,6 +14,7 @@ import { organizationSubject } from './subjects/organization'
 import { projectSubject } from './subjects/project'
 import { userSubject } from './subjects/user'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const appAbilities = z.union([
   projectSubject,
   userSubject,
