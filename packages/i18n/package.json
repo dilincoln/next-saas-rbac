@@ -3,9 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "files": [
-    "paraglide/runtime.js",
-    "paraglide/messages.js"
+    "paraglide/messages.js",
+    "types/*.d.ts"
   ],
+  "exports": {
+    "./messages": {
+      "default": "./paraglide/messages.js",
+      "types": "./types/messages.d.ts"
+    },
+    ".": {
+      "default": "./paraglide/runtime.js",
+      "types": "./types/runtime.d.ts"
+    }
+  },
   "scripts": {
     "dev": "run-p dev:*",
     "dev:paraglide": "pnpm build --watch",

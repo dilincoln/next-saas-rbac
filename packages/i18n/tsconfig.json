@@ -1,5 +1,5 @@
 {
-  "include": ["paraglide/messages.js"],
+  "include": ["paraglide/**/*.js"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "lib": ["es2023"],
@@ -9,7 +9,8 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "preserveConstEnums": true,
-    "outDir": ".",
+    "outDir": "./types",
+    "rootDir": "./paraglide",
     "declarationMap": true
   }
 }

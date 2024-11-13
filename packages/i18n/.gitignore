@@ -1,2 +1,2 @@
-**/*.d.ts
-**/*.d.ts.map
+paraglide/**/*
+types/**/*
