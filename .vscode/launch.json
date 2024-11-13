@@ -42,6 +42,7 @@
     {
       "name": "SaaS: debug full stack",
       "configurations": [
+        "i18n: translate",
         "Fastify: debug back-end API",
         "Next.js: debug client-side",
         "Next.js: debug server-side"
