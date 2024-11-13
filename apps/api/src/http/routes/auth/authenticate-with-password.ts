@@ -1,4 +1,5 @@
 import { env } from '@saas/env'
+import * as m from '@saas/i18n/messages'
 import { compare } from 'bcryptjs'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
@@ -38,7 +39,7 @@ export async function authenticateWithPassword(app: FastifyInstance) {
       })
 
       if (!userFromEmail) {
-        throw new BadRequestError('Invalid Credentials')
+        throw new BadRequestError(m.invalid_credentials())
       }
 
       if (userFromEmail.passwordHash === null) {
@@ -53,7 +54,7 @@ export async function authenticateWithPassword(app: FastifyInstance) {
       )
 
       if (!isPasswordCorrect) {
-        throw new BadRequestError('Invalid Credentials')
+        throw new BadRequestError(m.invalid_credentials())
       }
 
       const token = await reply.jwtSign(

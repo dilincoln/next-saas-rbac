@@ -1,9 +1,9 @@
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import { fastifyPlugin } from 'fastify-plugin'
 
+import { UnauthorizedError } from '@/http/routes/_errors/unauthorized-error'
 import { prisma } from '@/lib/prisma'
-
-import { UnauthorizedError } from '../routes/_errors/unauthorized-error'
 
 export const authMiddleware = fastifyPlugin(async (app: FastifyInstance) => {
   app.addHook('preHandler', async (request) => {
@@ -13,7 +13,7 @@ export const authMiddleware = fastifyPlugin(async (app: FastifyInstance) => {
 
         return sub
       } catch {
-        throw new UnauthorizedError('Invalid auth token')
+        throw new UnauthorizedError(m.invalid_auth_token())
       }
     }
 
@@ -32,7 +32,9 @@ export const authMiddleware = fastifyPlugin(async (app: FastifyInstance) => {
       })
 
       if (!member) {
-        throw new UnauthorizedError("You're not a member of this organization")
+        throw new UnauthorizedError(
+          m.you_are_not_a_member_of_this_organization(),
+        )
       }
 
       const { organization, ...membership } = member

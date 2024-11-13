@@ -1,11 +1,11 @@
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { authMiddleware } from '@/http/middlewares/auth-middleware'
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { prisma } from '@/lib/prisma'
-
-import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function acceptInvite(app: FastifyInstance) {
   app
@@ -47,11 +47,11 @@ export async function acceptInvite(app: FastifyInstance) {
         })
 
         if (!user) {
-          throw new BadRequestError('User not found')
+          throw new BadRequestError(m.user_not_found())
         }
 
         if (invite.email !== user.email) {
-          throw new BadRequestError('This invite belongs to another user')
+          throw new BadRequestError(m.this_invite_belongs_to_another_user())
         }
 
         await prisma.$transaction([

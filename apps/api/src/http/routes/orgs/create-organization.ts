@@ -1,12 +1,12 @@
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { authMiddleware } from '@/http/middlewares/auth-middleware'
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { prisma } from '@/lib/prisma'
 import { createSlug } from '@/utils/create-slug'
-
-import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function createOrganization(app: FastifyInstance) {
   app
@@ -44,7 +44,7 @@ export async function createOrganization(app: FastifyInstance) {
 
           if (domainExists) {
             throw new BadRequestError(
-              'Another organization with this domain already exists',
+              m.another_organization_with_this_domain_already_exists(),
             )
           }
         }

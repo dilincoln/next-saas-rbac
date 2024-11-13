@@ -1,3 +1,4 @@
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
@@ -49,7 +50,7 @@ export async function getOrganizationBilling(app: FastifyInstance) {
 
         if (cannot('get', 'Billing')) {
           throw new Error(
-            "You're not allowed to get billing details from this organization",
+            m.you_are_not_allowed_to_get_billing_details_from_this_organization(),
           )
         }
 

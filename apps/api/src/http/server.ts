@@ -12,6 +12,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { errorHandler } from '@/http/error-handler'
+import { i18nMiddleware } from '@/http/middlewares/i18n'
 import { authenticateWithPassword } from '@/http/routes/auth/authenticate-with-password'
 import { createAccount } from '@/http/routes/auth/create-account'
 import { getProfile } from '@/http/routes/auth/get-profile'
@@ -82,6 +83,8 @@ app.register(fastifyJwt, {
 })
 
 app.register(fastifyCors)
+
+app.register(i18nMiddleware)
 
 app.register(createAccount)
 app.register(authenticateWithPassword)

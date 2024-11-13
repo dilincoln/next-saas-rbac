@@ -1,14 +1,14 @@
 import { projectSchema } from '@saas/auth'
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { authMiddleware } from '@/http/middlewares/auth-middleware'
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
+import { UnauthorizedError } from '@/http/routes/_errors/unauthorized-error'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
-
-import { BadRequestError } from '../_errors/bad-request-error'
-import { UnauthorizedError } from '../_errors/unauthorized-error'
 
 export async function deleteProject(app: FastifyInstance) {
   app
@@ -44,7 +44,7 @@ export async function deleteProject(app: FastifyInstance) {
         })
 
         if (!project) {
-          throw new UnauthorizedError('Project not found')
+          throw new UnauthorizedError(m.project_not_found())
         }
 
         const authProject = projectSchema.parse(project)
@@ -52,7 +52,9 @@ export async function deleteProject(app: FastifyInstance) {
         const { cannot } = getUserPermissions(userId, membership.role)
 
         if (cannot('delete', authProject)) {
-          throw new BadRequestError("You're not allowed to delete this project")
+          throw new BadRequestError(
+            m.you_are_not_allowed_to_delete_this_project(),
+          )
         }
 
         await prisma.project.delete({

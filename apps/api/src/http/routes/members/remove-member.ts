@@ -1,12 +1,12 @@
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { authMiddleware } from '@/http/middlewares/auth-middleware'
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
-
-import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function removeMember(app: FastifyInstance) {
   app
@@ -38,7 +38,7 @@ export async function removeMember(app: FastifyInstance) {
 
         if (cannot('delete', 'User')) {
           throw new BadRequestError(
-            "You're not allowed to remove this member from the organization",
+            m.you_are_not_allowed_to_remove_this_member_from_the_organization(),
           )
         }
 

@@ -1,13 +1,13 @@
 import { organizationSchema } from '@saas/auth'
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { authMiddleware } from '@/http/middlewares/auth-middleware'
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
-
-import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function transferOrganization(app: FastifyInstance) {
   app
@@ -45,7 +45,7 @@ export async function transferOrganization(app: FastifyInstance) {
 
         if (cannot('transfer_ownership', authOrganization)) {
           throw new BadRequestError(
-            "You're not allowed to transfer this organization",
+            m.you_are_not_allowed_to_transfer_this_organization(),
           )
         }
 
@@ -60,7 +60,7 @@ export async function transferOrganization(app: FastifyInstance) {
 
         if (!transferToMembership) {
           throw new BadRequestError(
-            'Target user is not a member of this organization',
+            m.target_user_is_not_a_member_of_this_organization(),
           )
         }
 

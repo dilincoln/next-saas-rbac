@@ -1,12 +1,12 @@
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { authMiddleware } from '@/http/middlewares/auth-middleware'
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { prisma } from '@/lib/prisma'
 import { getUserPermissions } from '@/utils/get-user-permissions'
-
-import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function revokeInvite(app: FastifyInstance) {
   app
@@ -37,7 +37,7 @@ export async function revokeInvite(app: FastifyInstance) {
         const { cannot } = getUserPermissions(userId, membership.role)
 
         if (cannot('delete', 'Invite')) {
-          throw new BadRequestError("You're not allowed to delete an invite")
+          throw new BadRequestError(m.you_are_not_allowed_to_delete_an_invite())
         }
 
         const invite = await prisma.invite.findUnique({
@@ -48,7 +48,7 @@ export async function revokeInvite(app: FastifyInstance) {
         })
 
         if (!invite) {
-          throw new BadRequestError('Invite not found')
+          throw new BadRequestError(m.invite_not_found_or_expired())
         }
 
         await prisma.invite.delete({

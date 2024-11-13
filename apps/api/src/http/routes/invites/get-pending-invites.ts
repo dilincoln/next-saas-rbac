@@ -1,12 +1,12 @@
 import { roleSchema } from '@saas/auth'
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { authMiddleware } from '@/http/middlewares/auth-middleware'
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { prisma } from '@/lib/prisma'
-
-import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function getPendingInvites(app: FastifyInstance) {
   app
@@ -53,7 +53,7 @@ export async function getPendingInvites(app: FastifyInstance) {
         })
 
         if (!user) {
-          throw new BadRequestError('User not found')
+          throw new BadRequestError(m.user_not_found())
         }
 
         const invites = await prisma.invite.findMany({

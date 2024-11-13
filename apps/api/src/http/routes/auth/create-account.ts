@@ -1,3 +1,4 @@
+import * as m from '@saas/i18n/messages'
 import { hash } from 'bcryptjs'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
@@ -34,7 +35,7 @@ export async function createAccount(app: FastifyInstance) {
       })
 
       if (userWithSameEmailExists) {
-        throw new BadRequestError('User with this email already exists')
+        throw new BadRequestError(m.user_with_this_email_already_exists())
       }
 
       const [, domain] = email.split('@')

@@ -1,11 +1,11 @@
 import { roleSchema } from '@saas/auth'
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { prisma } from '@/lib/prisma'
-
-import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function getInvite(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
@@ -67,7 +67,7 @@ export async function getInvite(app: FastifyInstance) {
       })
 
       if (!invite) {
-        throw new BadRequestError('Invite not found')
+        throw new BadRequestError(m.invite_not_found_or_expired())
       }
 
       return {

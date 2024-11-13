@@ -1,13 +1,13 @@
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import z from 'zod'
 
 import { authMiddleware } from '@/http/middlewares/auth-middleware'
+import { BadRequestError } from '@/http/routes/_errors/bad-request-error'
 import { prisma } from '@/lib/prisma'
 import { createSlug } from '@/utils/create-slug'
 import { getUserPermissions } from '@/utils/get-user-permissions'
-
-import { BadRequestError } from '../_errors/bad-request-error'
 
 export async function createProject(app: FastifyInstance) {
   app
@@ -45,7 +45,7 @@ export async function createProject(app: FastifyInstance) {
 
         if (cannot('create', 'Project')) {
           throw new BadRequestError(
-            "You're not allowed to create a project in this organization",
+            m.you_are_not_allowed_to_create_a_project_in_this_organization(),
           )
         }
 

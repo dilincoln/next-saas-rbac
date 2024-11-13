@@ -1,4 +1,5 @@
 import { env } from '@saas/env'
+import * as m from '@saas/i18n/messages'
 import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
@@ -82,7 +83,7 @@ export async function authenticateWithGithub(app: FastifyInstance) {
 
       if (email === null) {
         throw new BadRequestError(
-          'Your GitHub account must have an email to authenticate',
+          m.your_github_account_must_have_an_email_to_authenticate(),
         )
       }
 
