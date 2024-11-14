@@ -6,6 +6,7 @@
   "invalid_auth_token": "Invalid auth token",
   "invalid_credentials": "Invalid Credentials",
   "invite_not_found_or_expired": "Invite not found or expired",
+  "password": "Password",
   "project_not_found": "Project not found",
   "target_user_is_not_a_member_of_this_organization": "Target user is not a member of this organization",
   "this_invite_belongs_to_another_user": "This invite belongs to another user",

@@ -6,6 +6,7 @@
   "invalid_auth_token": "Token de autenticação inválido",
   "invalid_credentials": "Credenciais inválidas",
   "invite_not_found_or_expired": "Convite não encontrado ou expirado",
+  "password": "Senha",
   "project_not_found": "Projeto não encontrado",
   "target_user_is_not_a_member_of_this_organization": "O usuário alvo não é membro desta organização",
   "this_invite_belongs_to_another_user": "Este convite pertence a outro usuário",

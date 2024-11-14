@@ -1,16 +1,15 @@
 {
-  "include": ["paraglide/**/*.js"],
+  "include": ["paraglide", "next-adapter"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "lib": ["es2023"],
-    "module": "Node16",
+    "moduleResolution": "nodenext",
     "target": "ES2022",
-    "allowJs": true,
+    "module": "NodeNext",
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "preserveConstEnums": true,
+    "allowJs": true,
+    "skipLibCheck": true,
     "outDir": "./types",
-    "rootDir": "./paraglide",
+    "emitDeclarationOnly": true,
     "declarationMap": true
   }
 }
