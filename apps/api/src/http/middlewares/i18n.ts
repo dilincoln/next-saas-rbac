@@ -2,7 +2,7 @@ import {
   isAvailableLanguageTag,
   setLanguageTag,
   sourceLanguageTag,
-} from '@saas/i18n'
+} from '@saas/i18n/runtime'
 import type { FastifyInstance } from 'fastify'
 import fastifyPlugin from 'fastify-plugin'
 
