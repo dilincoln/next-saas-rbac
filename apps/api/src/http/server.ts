@@ -41,6 +41,9 @@ import { deleteProject } from '@/http/routes/projects/delete-project'
 import { getProject } from '@/http/routes/projects/get-project'
 import { getProjects } from '@/http/routes/projects/get-projects'
 import { updateProject } from '@/http/routes/projects/update-project'
+import { exportOpenApi } from '@/utils/export-openapi'
+
+const args = process.argv.slice(2)
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -120,6 +123,12 @@ app.register(getPendingInvites)
 
 app.register(getOrganizationBilling)
 
-app.listen({ port: 3333 }).then(() => {
-  console.log('Server listening on port 3333')
-})
+if (args.includes('--export-openapi')) {
+  app.ready(() => {
+    exportOpenApi(app.swagger())
+  })
+} else {
+  app.listen({ port: 3333 }).then(() => {
+    console.log('Server listening on port 3333')
+  })
+}
