@@ -1,6 +1,8 @@
 import { env } from '@saas/env'
 import { type CookiesFn, getCookie } from 'cookies-next'
 
+import { I18N_COOKIE_NAME } from '@/constants/i18n-cookie-name'
+
 class HTTPError {
   constructor(message: string, status: number = 400) {
     this.message = message
@@ -39,7 +41,7 @@ class ApiClient {
       })
     }
 
-    const locale = await getCookie('NEXT_LOCALE', {
+    const locale = await getCookie(I18N_COOKIE_NAME, {
       cookies: cookieStore,
     })
 
