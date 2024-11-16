@@ -1,3 +1,3 @@
 export default async function Home() {
-  return <h1>Hello World</h1>
+  return <div className="py-4"></div>
 }
