@@ -1,3 +1,5 @@
+'use server'
+
 import {
   type AvailableLanguageTag,
   isAvailableLanguageTag,
@@ -5,10 +7,11 @@ import {
   setLanguageTag,
   sourceLanguageTag,
 } from '@saas/i18n/runtime'
+import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
 import { type NextRequest, NextResponse } from 'next/server'
 
-export const I18N_COOKIE_NAME = 'NEXT_LOCALE'
+import { I18N_COOKIE_NAME } from '@/constants/i18n-cookie-name'
 
 function setLanguage(request: NextRequest, lang: AvailableLanguageTag) {
   const response = NextResponse.redirect(request.clone().url)
@@ -38,4 +41,8 @@ export async function i18nMiddleware(request: NextRequest) {
   }
 
   return NextResponse.next()
+}
+
+export async function revalidateI18n() {
+  revalidatePath('/')
 }
