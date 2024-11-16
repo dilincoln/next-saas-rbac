@@ -34,7 +34,7 @@ export function SignInForm() {
       <CardContent>
         <form action={formAction} className="space-y-4">
           {success === false && message && (
-            <Alert variant="destructive">
+            <Alert className="m-0" variant="destructive">
               <AlertTriangle className="size-4" />
               <AlertTitle>{m.sign_in_failed()}</AlertTitle>
               <AlertDescription>
