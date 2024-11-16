@@ -39,6 +39,16 @@ class ApiClient {
       })
     }
 
+    const locale = await getCookie('NEXT_LOCALE', {
+      cookies: cookieStore,
+    })
+
+    if (locale) {
+      Object.assign(headers, {
+        'Accept-Language': locale,
+      })
+    }
+
     const request = await fetch(new URL(url, this.baseUrl).toString(), {
       ...config,
       headers,

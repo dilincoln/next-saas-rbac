@@ -1,5 +1,6 @@
 'use client'
 
+import * as m from '@saas/i18n/messages'
 import { AlertTriangle, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -29,7 +30,7 @@ export function SignInForm() {
       {success === false && message && (
         <Alert variant="destructive">
           <AlertTriangle className="size-4" />
-          <AlertTitle>Sign in failed</AlertTitle>
+          <AlertTitle>{m.sign_in_failed()}</AlertTitle>
           <AlertDescription>
             <p>{message}</p>
           </AlertDescription>
@@ -37,7 +38,7 @@ export function SignInForm() {
       )}
 
       <div className="space-y-1">
-        <Label htmlFor="email">E-mail</Label>
+        <Label htmlFor="email">{m.email()}</Label>
         <Input
           defaultValue={formData?.get('email')?.toString()}
           id="email"
@@ -53,7 +54,7 @@ export function SignInForm() {
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">{m.password()}</Label>
         <Input id="password" name="password" type="password" />
 
         {errors?.password && (
@@ -66,13 +67,13 @@ export function SignInForm() {
           className="text-xs font-medium text-foreground hover:underline"
           href="/auth/forgot-password"
         >
-          Forgot your password?
+          {m.forgot_your_password()}
         </Link>
       </div>
 
       <Button className="w-full" disabled={isPending} type="submit">
         {isPending && <Loader2 className="mr-1 size-5 animate-spin" />}
-        Sign in with e-mail
+        {m.sign_in_with_email()}
       </Button>
 
       <div className="flex w-full justify-center">
@@ -81,7 +82,7 @@ export function SignInForm() {
             className={cn(isPending && 'pointer-events-none opacity-50')}
             href="/auth/sign-up"
           >
-            Create new account
+            {m.create_new_account()}
           </Link>
         </Button>
       </div>
@@ -95,11 +96,11 @@ export function SignInForm() {
         variant="outline"
       >
         <Image
-          alt="Sign in with Github"
+          alt={m.sign_in_with_github()}
           className="mr-2 size-4 dark:invert"
           src={githubIcon}
         />
-        Sign in with GitHub
+        {m.sign_in_with_github()}
       </Button>
     </form>
   )
