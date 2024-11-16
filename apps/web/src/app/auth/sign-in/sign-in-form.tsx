@@ -9,6 +9,7 @@ import { useActionState } from 'react'
 import githubIcon from '@/assets/github-icon.svg'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
@@ -26,82 +27,89 @@ export function SignInForm() {
     })
 
   return (
-    <form action={formAction} className="space-y-4">
-      {success === false && message && (
-        <Alert variant="destructive">
-          <AlertTriangle className="size-4" />
-          <AlertTitle>{m.sign_in_failed()}</AlertTitle>
-          <AlertDescription>
-            <p>{message}</p>
-          </AlertDescription>
-        </Alert>
-      )}
+    <Card>
+      <CardHeader>
+        <CardTitle>{m.sign_in_with_email()}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form action={formAction} className="space-y-4">
+          {success === false && message && (
+            <Alert variant="destructive">
+              <AlertTriangle className="size-4" />
+              <AlertTitle>{m.sign_in_failed()}</AlertTitle>
+              <AlertDescription>
+                <p>{message}</p>
+              </AlertDescription>
+            </Alert>
+          )}
 
-      <div className="space-y-1">
-        <Label htmlFor="email">{m.email()}</Label>
-        <Input
-          defaultValue={formData?.get('email')?.toString()}
-          id="email"
-          name="email"
-          type="email"
-        />
+          <div className="space-y-1">
+            <Label htmlFor="email">{m.email()}</Label>
+            <Input
+              defaultValue={formData?.get('email')?.toString()}
+              id="email"
+              name="email"
+              type="email"
+            />
 
-        {errors?.email && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.email}
-          </p>
-        )}
-      </div>
+            {errors?.email && (
+              <p className="text-xs font-medium text-red-500 dark:text-red-400">
+                {errors.email}
+              </p>
+            )}
+          </div>
 
-      <div className="space-y-1">
-        <Label htmlFor="password">{m.password()}</Label>
-        <Input id="password" name="password" type="password" />
+          <div className="space-y-1">
+            <Label htmlFor="password">{m.password()}</Label>
+            <Input id="password" name="password" type="password" />
 
-        {errors?.password && (
-          <p className="text-xs font-medium text-red-500 dark:text-red-400">
-            {errors.password}
-          </p>
-        )}
+            {errors?.password && (
+              <p className="text-xs font-medium text-red-500 dark:text-red-400">
+                {errors.password}
+              </p>
+            )}
 
-        <Link
-          className="text-xs font-medium text-foreground hover:underline"
-          href="/auth/forgot-password"
-        >
-          {m.forgot_your_password()}
-        </Link>
-      </div>
+            <Link
+              className="text-xs font-medium text-foreground hover:underline"
+              href="/auth/forgot-password"
+            >
+              {m.forgot_your_password()}
+            </Link>
+          </div>
 
-      <Button className="w-full" disabled={isPending} type="submit">
-        {isPending && <Loader2 className="mr-1 size-5 animate-spin" />}
-        {m.sign_in_with_email()}
-      </Button>
+          <Button className="w-full" disabled={isPending} type="submit">
+            {isPending && <Loader2 className="mr-1 size-5 animate-spin" />}
+            {m.sign_in_with_email()}
+          </Button>
 
-      <div className="flex w-full justify-center">
-        <Button asChild size="sm" variant="link">
-          <Link
-            className={cn(isPending && 'pointer-events-none opacity-50')}
-            href="/auth/sign-up"
+          <div className="flex w-full justify-center">
+            <Button asChild size="sm" variant="link">
+              <Link
+                className={cn(isPending && 'pointer-events-none opacity-50')}
+                href="/auth/sign-up"
+              >
+                {m.create_new_account()}
+              </Link>
+            </Button>
+          </div>
+
+          <Separator />
+
+          <Button
+            className="w-full"
+            disabled={isPending}
+            type="submit"
+            variant="outline"
           >
-            {m.create_new_account()}
-          </Link>
-        </Button>
-      </div>
-
-      <Separator />
-
-      <Button
-        className="w-full"
-        disabled={isPending}
-        type="submit"
-        variant="outline"
-      >
-        <Image
-          alt={m.sign_in_with_github()}
-          className="mr-2 size-4 dark:invert"
-          src={githubIcon}
-        />
-        {m.sign_in_with_github()}
-      </Button>
-    </form>
+            <Image
+              alt={m.sign_in_with_github()}
+              className="mr-2 size-4 dark:invert"
+              src={githubIcon}
+            />
+            {m.sign_in_with_github()}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   )
 }
