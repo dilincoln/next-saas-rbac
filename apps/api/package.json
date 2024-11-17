@@ -4,6 +4,7 @@
   "scripts": {
     "lint": "eslint .",
     "export-openapi": "pnpm env:load tsx src/http/server.ts --export-openapi",
+    "postinstall": "pnpm dlx prisma generate",
     "dev": "pnpm env:load tsx watch src/http/server.ts",
     "db:migrate": "pnpm env:load prisma migrate dev",
     "db:seed": "pnpm env:load prisma db seed",
